@@ -20,7 +20,6 @@ const SignupForm = () => {
   const [message, setMessage] = useState("");
   const port = config.backendUrl;
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
