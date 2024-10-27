@@ -15,7 +15,7 @@ const SignupForm = () => {
     email: "",
   });
   
-  const hostName = formData.fullName.split(" ").join("");
+  //const hostName = formData.fullName.split(" ").join("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
   const port = config.backendUrl;
@@ -39,7 +39,7 @@ const SignupForm = () => {
       localStorage.setItem("token", response.data.token);
       setMessage("ההרשמה הצליחה!");
       navigate("/hostOptions", {
-        state: { hostName},
+        state: { hostName: formData.fullName },  // שימוש בשם המלא כולל רווחים
       }); // נווט לדף הצגת אירועים
     } catch (error) {
       if (error.response && error.response.data.msg) {
