@@ -19,6 +19,7 @@ function CreateEvent() {
   const hostName = location.state?.hostName || "";
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const port = (process.env.PORT) || 5000;
 
   useEffect(() => {
     if (!isTokenPresent()) {
@@ -51,7 +52,7 @@ function CreateEvent() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/events/create-event",
+        `${port}/guest/events/create-event`,
         formData,
         {
           headers: {
