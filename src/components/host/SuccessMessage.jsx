@@ -9,7 +9,7 @@ const SuccessMessage = () => {
   const { eventId, eventName, eventLocation, eventDate, eventDescription, hostName } = location.state || {};
   const [copySuccess, setCopySuccess] = useState('');
   const [shareOptionsVisible, setShareOptionsVisible] = useState(false);
-  const port = (process.env.REACT_APP_BACKEND_URLT) || 5000;
+  const port = (process.env.REACT_APP_BACKEND_URLT);
 
   const registrationUrl = `${port}/guest/${eventId}`;
 
