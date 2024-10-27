@@ -7,13 +7,21 @@ import config from "../../config.js";
 
 const SuccessMessage = () => {
   const location = useLocation();
-  const { eventId, eventName, eventLocation, eventDate, eventDescription, hostName } = location.state || {};
+  const {
+    eventId,
+    eventName,
+    eventLocation,
+    eventDate,
+    eventDescription,
+    hostName,
+  } = location.state || {};
+  
   const [copySuccess, setCopySuccess] = useState('');
   const [shareOptionsVisible, setShareOptionsVisible] = useState(false);
+  
   const port = config.backendUrl;
-
   const registrationUrl = `${port}/guest/${eventId}`;
-
+  
   const messageHtml = `
     <h2>הזמנה לאירוע</h2>
     <p>אנו שמחים להזמינך:</p>
@@ -38,19 +46,14 @@ const SuccessMessage = () => {
     הירשם כאן: ${registrationUrl}
   `;
 
-  const copyToClipboard = () => {
-    const textArea = document.createElement("textarea");
-    textArea.value = textToShare;
-    document.body.appendChild(textArea);
-    textArea.select();
+  const copyToClipboard = async () => {
     try {
-      document.execCommand('copy');
+      await navigator.clipboard.writeText(textToShare);
       setCopySuccess('ההודעה הועתקה!');
       setTimeout(() => setCopySuccess(''), 3000);
     } catch (err) {
       console.error('שגיאה בהעתקה: ', err);
     }
-    document.body.removeChild(textArea);
   };
 
   const shareViaWhatsApp = () => {
@@ -68,19 +71,39 @@ const SuccessMessage = () => {
     <div className="success-message-container">
       <div dangerouslySetInnerHTML={{ __html: messageHtml }} />
       <div className="share-options">
-        <button onClick={() => setShareOptionsVisible(!shareOptionsVisible)} className="share-button" title="שתף">
+        <button 
+          onClick={() => setShareOptionsVisible(prev => !prev)} 
+          className="share-button" 
+          title="שתף"
+          aria-label="שתף"
+        >
           <FaShareAlt />
         </button>
         {shareOptionsVisible && (
           <div className="share-buttons-container">
-            <button onClick={copyToClipboard} className="share-button copy-button" title="העתק הודעה">
+            <button 
+              onClick={copyToClipboard} 
+              className="share-button copy-button" 
+              title="העתק הודעה"
+              aria-label="העתק הודעה"
+            >
               <MdContentCopy />
             </button>
             {copySuccess && <span className="copy-success">{copySuccess}</span>}
-            <button onClick={shareViaWhatsApp} className="share-button whatsapp-button" title="שתף בוואטסאפ">
+            <button 
+              onClick={shareViaWhatsApp} 
+              className="share-button whatsapp-button" 
+              title="שתף בוואטסאפ"
+              aria-label="שתף בוואטסאפ"
+            >
               <FaWhatsapp />
             </button>
-            <button onClick={shareViaEmail} className="share-button email-button" title="שתף באימייל">
+            <button 
+              onClick={shareViaEmail} 
+              className="share-button email-button" 
+              title="שתף באימייל"
+              aria-label="שתף באימייל"
+            >
               <MdEmail />
             </button>
           </div>
