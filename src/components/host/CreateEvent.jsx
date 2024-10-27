@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../../../src/cssS/CreateEvent.css";
+import config from "../../config.js";
 
 function CreateEvent() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function CreateEvent() {
   const hostName = location.state?.hostName || "";
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const port = (process.env.REACT_APP_BACKEND_URL);
+  const port = config.backendUrl;
 
   useEffect(() => {
     if (!isTokenPresent()) {

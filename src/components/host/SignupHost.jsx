@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../../src/cssS/SignupForm.css";
+import config from "../../config.js";
+
+
 const SignupForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -15,7 +18,7 @@ const SignupForm = () => {
   const hostName = formData.fullName.split(" ").join("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
-  const port = (process.env.REACT_APP_BACKEND_URL);
+  const port = config.backendUrl;
 
 
   const handleChange = (e) => {

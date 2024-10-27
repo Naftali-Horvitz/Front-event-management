@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../../src/cssS/Guest.css";
+import config from "../../config.js";
 
 function GuestForm() {
-  const port = (process.env.PORT) || 5000;
+  const port = config.backendUrl;
   const { eventId } = useParams();
   const [formData, setFormData] = useState({
     name: "",

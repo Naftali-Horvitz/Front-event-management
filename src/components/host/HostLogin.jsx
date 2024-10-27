@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../../src/cssS/HostLogin.css";
-
+import config from "../../config.js";
 function HostLogin() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -34,7 +34,7 @@ function HostLogin() {
       /[^a-zA-Z0-9]/.test(password)
     );
   };
-  const port = (process.env.REACT_APP_BACKEND_URL);
+  const port = config.backendUrl;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

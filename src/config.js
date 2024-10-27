@@ -1,0 +1,4 @@
+const config = {
+    backendUrl: "https://test-back-ty38.onrender.com"  // כאן תכתוב את ה-URL שלך
+  };
+  
