@@ -20,7 +20,7 @@ const SuccessMessage = () => {
   const [shareOptionsVisible, setShareOptionsVisible] = useState(false);
   
   const port = config.backendUrl;
-  const registrationUrl = `/guest/${eventId}`;
+  const registrationUrl = `https://test-7ft1.onrender.com/guest/${eventId}`;
   
   const messageHtml = `
     <h2>הזמנה לאירוע</h2>
