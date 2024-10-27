@@ -1,0 +1,26 @@
+.HostOptions-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+  
+  .HostOptions-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .HostOptions-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .HostOptions-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+  }

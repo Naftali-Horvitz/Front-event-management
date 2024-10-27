@@ -1,0 +1,94 @@
+.success-message-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    max-width: 200px;
+    margin: 150px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .success-message-container h2 {
+    color: #333;
+    text-align: center;
+  }
+  
+  .success-message-container p {
+    margin: 10px 0;
+  }
+  
+  .success-message-container a:hover {
+    text-decoration: underline;
+  }
+  
+  .success-message-container a {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .share-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 24px;
+    display: inline-block;
+  }
+  
+  .share-options {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .share-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .share-icon {
+    font-size: 24px;
+    margin: 0 10px;
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .share-icon:hover {
+    color: #45a049;
+  }
+  
+  .copy-success {
+    display: block;
+    color: #4caf50;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .copy-button {
+    background: none;
+    border: none;
+    color: #333;
+  }
+  
+  .whatsapp-icon {
+    color: #25D366;
+  }
+  
+  .email-button {
+    background: none;
+    border: none;
+    color: #D44638;
+  }
+  
+  .copy-success {
+    color: green;
+    margin-left: 10px;
+    font-size: 14px;
+  }
