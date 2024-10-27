@@ -117,7 +117,7 @@ function CreateEvent() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="eventLocation">מיקום האירוע</label>
+              <label htmlFor="eventLocation">מיקום </label>
               <input
                 type="text"
                 id="eventLocation"
