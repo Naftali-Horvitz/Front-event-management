@@ -3,13 +3,14 @@ import { useLocation } from "react-router-dom";
 import { FaWhatsapp, FaShareAlt } from "react-icons/fa";
 import { MdEmail, MdContentCopy } from "react-icons/md";
 import "../../../src/cssS/SuccessMessage.css";
+const port = config.backendUrl;
 
 const SuccessMessage = () => {
   const location = useLocation();
   const { eventId, eventName, eventLocation, eventDate, eventDescription, hostName } = location.state || {};
   const [copySuccess, setCopySuccess] = useState('');
   const [shareOptionsVisible, setShareOptionsVisible] = useState(false);
-  const port = (process.env.REACT_APP_BACKEND_URLT);
+  const port = config.backendUrl;
 
   const registrationUrl = `${port}/guest/${eventId}`;
 

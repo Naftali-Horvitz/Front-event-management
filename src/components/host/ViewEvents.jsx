@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../cssS/ViewEvents.css';
+import config from "../../config.js";
 
 function ViewEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const port = config.backendUrl;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -18,7 +20,7 @@ function ViewEvents() {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/events/view-events", {
+        const response = await axios.get(`${port}/events/view-events`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setEvents(response.data);
