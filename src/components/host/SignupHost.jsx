@@ -37,7 +37,7 @@ const SignupForm = () => {
         formData
       );
       localStorage.setItem("token", response.data.token);
-      setMessage("ההרשמה הצליחה!");
+      setMessage("ההרשמה הצליחה! ");
       navigate("/hostOptions", {
         state: { hostName: formData.fullName },  // שימוש בשם המלא כולל רווחים
       }); // נווט לדף הצגת אירועים
