@@ -15,7 +15,7 @@ const SignupForm = () => {
     email: "",
   });
   
-  const hostName = formData.fullName.split(" ").join("");
+  const hostName = formData.fullName.join("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
   const port = config.backendUrl;
