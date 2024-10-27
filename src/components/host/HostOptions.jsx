@@ -25,7 +25,7 @@ function HostOptions() {
 
   return (
     <div className="HostOptions-container">
-      <h1 className="HostOptions-title">ברוך הבא {hostName}</h1>
+      <h1 className="HostOptions-title"> ברוך הבא {hostName}</h1>
       <div className="HostOptions-buttons">
         <button onClick={handleViewEvents} className="HostOptions-button">
           הצג אירועים

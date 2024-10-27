@@ -43,7 +43,7 @@ const SuccessMessage = () => {
     בתאריך ${eventDate}
     נא הבטיחו מקומכם איתנו
     מצפים לכם ${hostName}
-    הירשם כאן: ${registrationUrl}
+    הירשם כאן: <a href="${registrationUrl}">הירשם כאן</a>
   `;
 
   const copyToClipboard = async () => {
