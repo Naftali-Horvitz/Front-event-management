@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { FaWhatsapp, FaShareAlt } from "react-icons/fa";
 import { MdEmail, MdContentCopy } from "react-icons/md";
 import "../../../src/cssS/SuccessMessage.css";
-const port = config.backendUrl;
+import config from "../../config.js";
 
 const SuccessMessage = () => {
   const location = useLocation();
