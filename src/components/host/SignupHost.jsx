@@ -15,10 +15,11 @@ const SignupForm = () => {
     email: "",
   });
   
-  const hostName = formData.fullName.join("");
+  const hostName = formData.fullName.split(" ").join("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
   const port = config.backendUrl;
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +38,7 @@ const SignupForm = () => {
         formData
       );
       localStorage.setItem("token", response.data.token);
-      setMessage("ההרשמה הצליחה! ");
+      setMessage("ההרשמה הצליחה!");
       navigate("/hostOptions", {
         state: { hostName},
       }); // נווט לדף הצגת אירועים
