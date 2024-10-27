@@ -53,7 +53,7 @@ function CreateEvent() {
 
     try {
       const response = await axios.post(
-        `${port}/guest/events/create-event`,
+        `${port}/events/create-event`,
         formData,
         {
           headers: {
