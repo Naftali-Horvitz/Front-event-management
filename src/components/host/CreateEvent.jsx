@@ -19,7 +19,7 @@ function CreateEvent() {
   const hostName = location.state?.hostName || "";
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const port = (process.env.PORT) || 5000;
+  const port = (process.env.REACT_APP_BACKEND_URL) || 5000;
 
   useEffect(() => {
     if (!isTokenPresent()) {

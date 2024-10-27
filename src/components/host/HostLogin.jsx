@@ -34,7 +34,7 @@ function HostLogin() {
       /[^a-zA-Z0-9]/.test(password)
     );
   };
-  const port = (process.env.PORT) || 5000;
+  const port = (process.env.REACT_APP_BACKEND_URL) || 5000;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
