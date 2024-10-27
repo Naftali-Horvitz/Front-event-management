@@ -14,7 +14,8 @@ const SignupForm = () => {
   const hostName = formData.fullName.split(" ").join("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
-  //const port = (process.env.PORT) || 5000;
+  const port = (process.env.PORT) || 5000;
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
