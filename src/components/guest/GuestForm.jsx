@@ -31,7 +31,7 @@ function GuestForm() {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${port}${eventId}`,
+        `${port}/guest/${eventId}`,
         formData
       );
       if (response.status === 200) {
