@@ -51,7 +51,6 @@ const SignupForm = () => {
       setIsRegistering(false);
     }
   };
-
   return (
     <div className="container">
       <h1>הרשמה לאתר</h1>
