@@ -20,7 +20,7 @@ const SuccessMessage = () => {
   const [shareOptionsVisible, setShareOptionsVisible] = useState(false);
   
   const port = config.backendUrl;
-  const registrationUrl = `${port}/guest/${eventId}`;
+  const registrationUrl = `/guest/${eventId}`;
   
   const messageHtml = `
     <h2>הזמנה לאירוע</h2>
