@@ -11,6 +11,7 @@ const SignupForm = () => {
     password: "",
     email: "",
   });
+  
   const hostName = formData.fullName.split(" ").join("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
