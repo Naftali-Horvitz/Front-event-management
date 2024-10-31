@@ -52,13 +52,16 @@ function HostLogin() {
         formData
       );
       localStorage.setItem("token", response.data.token);
+      window.dispatchEvent(new Event('storage'));
       setMessage("התחברת בהצלחה");
       const user = response.data.user.userId;
       const hostName = response.data.user.fullName;
-      navigate("/hostOptions", {
-        state: { hostId: user, hostName: hostName},
-      });
-      console.log("hostName:", hostName);
+      // הצג הודעת הצלחה ועבור לדף הבית אחרי 2 שניות
+      setTimeout(() => {
+        navigate("/hostOptions", {
+          state: { hostId: user, hostName: hostName }
+        });
+      }, 2000);
     } catch (error) {
       if (error.response && error.response.data.msg) {
         setMessage(error.response.data.msg);

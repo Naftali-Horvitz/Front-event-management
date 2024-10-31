@@ -1,0 +1,21 @@
+/* MainLayout.css */
+.layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent; /* הסרת הרקע מהקונטיינר */
+  padding: 0 1.5%; /* רווח של 1.5% מכל צד עם צבע הרקע */
+ }
+ 
+ .main-content-full {
+  flex: 1;
+  width: 100%;
+  padding: 95px 0; /* הוספנו פדינג של 80px למעלה */
+ }
+ 
+ @media (max-width: 768px) {
+  .layout-container {
+    padding: 0 1%; /* רווח קטן יותר במובייל */
+    padding: 75px 0; /* פדינג קטן יותר במובייל */
+  }
+ }

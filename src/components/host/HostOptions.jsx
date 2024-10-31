@@ -8,12 +8,12 @@ function HostOptions() {
   const hostName = location.state?.hostName;
   const hostId = location.state?.hostId || null;
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!isTokenPresent()) {
-      setIsTokenValid(false);
-      setErrorMessage("אין טוקן זמין. אנא התחבר מחדש.");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!isTokenPresent()) {
+  //     setIsTokenValid(false);
+  //     setErrorMessage("אין טוקן זמין. אנא התחבר מחדש.");
+  //   }
+  // }, []);
   const handleViewEvents = () => {
     
     navigate("/view-events");

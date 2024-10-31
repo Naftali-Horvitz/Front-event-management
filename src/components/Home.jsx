@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../cssS/Home.css';
-
+import TextHome from "./TextHome";
 function Home() {
   useEffect(() => {
     const particles = document.querySelectorAll('.particle');
@@ -16,21 +16,8 @@ function Home() {
   }, []);
   return (
     <div className="container">
-      <div className="background-animation"></div>
-      <div className="content">
-        <h1 className="title">ברוכים הבאים</h1>
-        <p className="welcome-text">
-          בחרו את האפשרות המתאימה לכם
-        </p>
-        <div className="buttons">
-          <Link className="styled-link" id="host" to="/host">
-            מארח
-          </Link>
-          <Link className="styled-link" id="guest" to="/guest">
-            אורח
-          </Link>
-        </div>
-      </div>
+
+
       <div className="particles">
         {[...Array(50)].map((_, i) => (
           <div key={i} className="particle"></div>
