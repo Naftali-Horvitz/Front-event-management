@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StarIcon, Heart, Users, Calendar, ChevronRight, ChevronLeft, Play } from 'lucide-react';
+import {useNavigate } from "react-router-dom";
 
 const AboutPage = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
@@ -292,7 +294,7 @@ const AboutPage = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">מוכנים להתחיל לתכנן את האירוע שלכם?</h2>
           <p className="mb-8 text-blue-100">צרו איתנו קשר עוד היום ונהפוך את החלום שלכם למציאות</p>
-          <button className="bg-white text-blue-900 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+          <button onClick={() => navigate('/contactPage')} className="bg-white text-blue-900 px-8 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors">
             צור קשר עכשיו
           </button>
         </div>

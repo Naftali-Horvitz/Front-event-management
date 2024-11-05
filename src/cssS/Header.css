@@ -26,7 +26,10 @@
   transition: transform 0.3s ease;
   border-radius: 15px;
 }
-
+.logo-svg {
+  width: 200px;  /* או כל גודל אחר שתרצה */
+  height: auto;
+}
 .logo-img:hover {
   transform: scale(1.05);
 }
