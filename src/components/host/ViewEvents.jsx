@@ -46,14 +46,35 @@ function ViewEvents() {
     totalEvents: events.length,
     activeEvents: events.filter(e => new Date(e.date) >= new Date()).length,
     totalGuests: events.reduce((acc, curr) => acc + curr.totalGuests, 0),
+    
+    // אחוז אישורים: (כמות נרשמים / כמות מוזמנים) * 100
     avgConfirmationRate: events.length > 0
-      ? Math.round((events.reduce((acc, curr) => acc + (curr.confirmedGuests / curr.totalGuests), 0) / events.length) * 100)
+      ? Math.round(
+          (events.reduce((acc, curr) => {
+            const rate = (curr.confirmedGuests / curr.totalGuests) * 100;
+            return acc + (isNaN(rate) ? 0 : rate);
+          }, 0) / events.length)
+        )
       : 0,
-    avgActualAttendance: events.length > 0
-      ? Math.round((events.filter(e => e.actualAttendees).reduce((acc, curr) => acc + (curr.actualAttendees / curr.totalGuests), 0) / events.filter(e => e.actualAttendees).length) * 100)
-      : 0
+    
+    // אחוז הגעה בפועל: (כמות מגיעים בפועל / כמות נרשמים) * 100
+    avgActualAttendance: (() => {
+      const eventsWithAttendance = events.filter(e => 
+        e.actualAttendees != null && 
+        e.confirmedGuests != null && 
+        e.confirmedGuests > 0
+      );
+  
+      if (eventsWithAttendance.length === 0) return 0;
+  
+      const totalAttendanceRate = eventsWithAttendance.reduce((acc, curr) => {
+        const rate = (curr.actualAttendees / curr.confirmedGuests) * 100;
+        return acc + (isNaN(rate) ? 0 : rate);
+      }, 0);
+  
+      return Math.round(totalAttendanceRate / eventsWithAttendance.length);
+    })()
   };
-
   useEffect(() => {
     const checkAuthAndFetchEvents = async () => {
       if (!validateToken()) {
@@ -170,8 +191,8 @@ function ViewEvents() {
           {/*Actual QR attendance rate bar*/}
           <div className="mt-3">
             <div className="flex justify-between text-xs text-gray-600 mb-1">
-              <span>נוכחות בפועל (QR)</span>
-              <span>{Math.round((event.actualAttendees / event.totalGuests) * 100)}%</span>
+              <span>נוכחות בפועל </span>
+              <span>{event.confirmedGuests}%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div

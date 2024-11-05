@@ -1,4 +1,3 @@
-// features/navigation/components/BackButton.jsx
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
@@ -16,10 +15,10 @@ const BackButton = () => {
   return (
     <button
       onClick={handleBack}
-      className="p-2 text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="p-1 md:p-2 text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
       aria-label="חזור לדף הקודם"
     >
-      <ArrowRight className="w-5 h-5" />
+      <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
     </button>
   );
 };

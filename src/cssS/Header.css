@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  inset: 0 0 auto 0; /* קיצור ל-top, right, bottom, left */
+  inset: 0 0 auto 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -26,17 +26,19 @@
   transition: transform 0.3s ease;
   border-radius: 15px;
 }
+
 .logo-svg {
-  width: 200px;  /* או כל גודל אחר שתרצה */
+  width: 200px;
   height: auto;
 }
+
 .logo-img:hover {
   transform: scale(1.05);
 }
 
 .nav-list {
   display: flex;
-  gap: 4rem; /* במקום margin לכל item */
+  gap: 4rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -66,6 +68,57 @@
   transform-origin: left;
 }
 
+/* Mobile Menu Styles */
+.mobile-menu-button {
+  display: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #333;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 250px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  padding-top: 1rem;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.mobile-menu.active {
+  transform: translateX(0);
+}
+
+.mobile-menu .nav-list {
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1500;
+}
+
+.mobile-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Breakpoint */
 @media (max-width: 768px) {
   .header {
     padding: 0.5rem 1rem;
@@ -78,4 +131,39 @@
   .nav-list {
     display: none;
   }
+  
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  .mobile-menu .nav-list {
+    display: flex;
+  }
+
+  .logo-svg {
+    width: 150px; /* קטן יותר במובייל */
+  }
+}
+
+/* כפתור סגירה בתפריט המובייל */
+.mobile-menu-close {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* אנימציות נוספות לתפריט המובייל */
+.mobile-menu .nav-link {
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.mobile-menu .nav-link::after {
+  bottom: 0;
 }
