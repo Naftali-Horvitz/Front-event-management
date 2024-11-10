@@ -97,7 +97,42 @@ function ViewEvents() {
 
     checkAuthAndFetchEvents();
   }, []);
+  const handleEventClick = async () => {
+    setErrorMessage("");
 
+    if (!validateToken()) {
+      setIsTokenValid(false);
+      setErrorMessage("התחבר מחדש");
+      setIsCreating(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${port}/event/${eventId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getCurrentUser().token}`,
+          },
+        }
+      );
+      navigate("/successMessage", {
+        state: {
+          hostName: hostName,
+          eventId: eventId,
+          eventName: response.eventName,
+          eventDescription: response.eventDescription,
+          eventLocation: response.eventLocation,
+          eventDate: response.eventDate,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      setErrorMessage("שגיאה בטעינת האירוע.");
+    } finally {
+      setIsCreating(false);
+    }
+  };
   // פונקציה לחישוב סטטוס האירוע
   const getEventStatus = (date) => {
     const eventDate = new Date(date);
@@ -212,7 +247,7 @@ function ViewEvents() {
           <div className="relative group">
             <button
               className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-md hover:bg-green-100 transition-colors"
-              onClick={() => navigate(`/events/SuccessMessage`)}
+              onClick={() => handleEventClick()}
             >
               <Users size={16} />
               הזמן אורח
