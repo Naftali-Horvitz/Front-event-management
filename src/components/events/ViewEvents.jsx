@@ -212,42 +212,11 @@ function ViewEvents() {
           <div className="relative group">
             <button
               className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-md hover:bg-green-100 transition-colors"
+              onClick={() => navigate(`/events/SuccessMessage`)}
             >
               <Users size={16} />
               הזמן אורח
             </button>
-
-            {/* תפריט שיתוף */}
-            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-              <button
-                onClick={() => {
-                  const inviteLink = `${window.location.origin}/guest/${event._id}`;
-                  navigator.clipboard.writeText(inviteLink);
-                  alert('קישור ההזמנה הועתק ללוח');
-                }}
-                className="w-full text-right px-4 py-2 hover:bg-gray-100 rounded-md"
-              >
-                העתק קישור
-              </button>
-              <button
-                onClick={() => {
-                  const inviteLink = `${window.location.origin}/guest/${event._id}`;
-                  window.open(`https://wa.me/?text=${encodeURIComponent(inviteLink)}`);
-                }}
-                className="w-full text-right px-4 py-2 hover:bg-gray-100 rounded-md"
-              >
-                שתף בוואטסאפ
-              </button>
-              <button
-                onClick={() => {
-                  const inviteLink = `${window.location.origin}/guest/${event._id}`;
-                  window.location.href = `mailto:?subject=הזמנה לאירוע&body=${encodeURIComponent(inviteLink)}`;
-                }}
-                className="w-full text-right px-4 py-2 hover:bg-gray-100 rounded-md"
-              >
-                שתף במייל
-              </button>
-            </div>
           </div>
         </div>
       </div>
