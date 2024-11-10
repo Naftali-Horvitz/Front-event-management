@@ -46,32 +46,32 @@ function ViewEvents() {
     totalEvents: events.length,
     activeEvents: events.filter(e => new Date(e.date) >= new Date()).length,
     totalGuests: events.reduce((acc, curr) => acc + curr.totalGuests, 0),
-    
+
     // אחוז אישורים: (כמות נרשמים / כמות מוזמנים) * 100
     avgConfirmationRate: events.length > 0
       ? Math.round(
-          (events.reduce((acc, curr) => {
-            const rate = (curr.confirmedGuests / curr.totalGuests) * 100;
-            return acc + (isNaN(rate) ? 0 : rate);
-          }, 0) / events.length)
-        )
+        (events.reduce((acc, curr) => {
+          const rate = (curr.confirmedGuests / curr.totalGuests) * 100;
+          return acc + (isNaN(rate) ? 0 : rate);
+        }, 0) / events.length)
+      )
       : 0,
-    
+
     // אחוז הגעה בפועל: (כמות מגיעים בפועל / כמות נרשמים) * 100
     avgActualAttendance: (() => {
-      const eventsWithAttendance = events.filter(e => 
-        e.actualAttendees != null && 
-        e.confirmedGuests != null && 
+      const eventsWithAttendance = events.filter(e =>
+        e.actualAttendees != null &&
+        e.confirmedGuests != null &&
         e.confirmedGuests > 0
       );
-  
+
       if (eventsWithAttendance.length === 0) return 0;
-  
+
       const totalAttendanceRate = eventsWithAttendance.reduce((acc, curr) => {
         const rate = (curr.actualAttendees / curr.confirmedGuests) * 100;
         return acc + (isNaN(rate) ? 0 : rate);
       }, 0);
-  
+
       return Math.round(totalAttendanceRate / eventsWithAttendance.length);
     })()
   };
@@ -83,12 +83,6 @@ function ViewEvents() {
       }
 
       try {
-        // בשלב הפיתוח, נשתמש בנתוני דוגמה
-        // setEvents(previewData);
-        // setLoading(false);
-
-        // קוד אמיתי לשימוש בהמשך:
-
         const response = await axios.get(`${port}/events/view-events`, {
           headers: { Authorization: `Bearer ${getCurrentUser().token}` }
         });
@@ -207,12 +201,55 @@ function ViewEvents() {
           </div>
         </div>
 
-        <button
-          onClick={() => navigate(`/EventDetails/${event._id}`)}
-          className="mt-4 w-full py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors"
-        >
-          צפה בפרטים
-        </button>
+        <div className="flex gap-2 mt-4">
+          <button
+            onClick={() => navigate(`/EventDetails/${event._id}`)}
+            className="flex-1 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors"
+          >
+            צפה בפרטים
+          </button>
+
+          <div className="relative group">
+            <button
+              className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-md hover:bg-green-100 transition-colors"
+            >
+              <Users size={16} />
+              הזמן אורח
+            </button>
+
+            {/* תפריט שיתוף */}
+            <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <button
+                onClick={() => {
+                  const inviteLink = `${window.location.origin}/guest/${event._id}`;
+                  navigator.clipboard.writeText(inviteLink);
+                  alert('קישור ההזמנה הועתק ללוח');
+                }}
+                className="w-full text-right px-4 py-2 hover:bg-gray-100 rounded-md"
+              >
+                העתק קישור
+              </button>
+              <button
+                onClick={() => {
+                  const inviteLink = `${window.location.origin}/guest/${event._id}`;
+                  window.open(`https://wa.me/?text=${encodeURIComponent(inviteLink)}`);
+                }}
+                className="w-full text-right px-4 py-2 hover:bg-gray-100 rounded-md"
+              >
+                שתף בוואטסאפ
+              </button>
+              <button
+                onClick={() => {
+                  const inviteLink = `${window.location.origin}/guest/${event._id}`;
+                  window.location.href = `mailto:?subject=הזמנה לאירוע&body=${encodeURIComponent(inviteLink)}`;
+                }}
+                className="w-full text-right px-4 py-2 hover:bg-gray-100 rounded-md"
+              >
+                שתף במייל
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   };
