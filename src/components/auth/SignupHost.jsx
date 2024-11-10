@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import config from "../../config.js";
+import config from "../../../src/config";
 import { validateField, validateForm } from "../../utils/validation";
 import { setNewUserData, isTokenPresent } from "../../utils/authUtils";
 const SignupForm = () => {

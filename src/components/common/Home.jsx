@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import {useNavigate } from "react-router-dom";
 import { Calendar, Users, Clock, Smartphone, CheckCircle, Layout } from 'lucide-react';
-import '../cssS/Home.css';
+import '../../styles/components/Home.css';
 
 const Home = () => {
   const navigate = useNavigate();

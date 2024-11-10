@@ -4,19 +4,19 @@ import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
 
 // Components
-import Home from '../components/Home';
+import Home from '../components/common/Home';
 import Host from '../components/host/Host';
-import GuestForm from '../components/guest/GuestForm';
-import SignupHost from '../components/host/SignupHost';
-import HostLogin from '../components/host/HostLogin';
+import GuestForm from '../components/guests/GuestForm';
+import SignupHost from '../components/auth/SignupHost';
+import HostLogin from '../components/auth/HostLogin';
 import HostOptions from '../components/host/HostOptions';
-import CreateEvent from '../components/host/CreateEvent';
-import SuccessMessage from '../components/host/SuccessMessage';
-import ViewEvents from '../components/host/ViewEvents';
-import ContactPage from '../components/ContactPage';
-import AboutPage from '../components/AboutPage';
-import CustomizableInvitation from '../components/host/custom-event-invitation/CustomizableInvitation';
-import EventDetails from '../components/host/EventDetails';
+import CreateEvent from '../components/events/CreateEvent';
+import SuccessMessage from '../components/events/SuccessMessage';
+import ViewEvents from '../components/events/ViewEvents';
+import ContactPage from '../components/common/ContactPage';
+import AboutPage from '../components/common/AboutPage';
+import CustomizableInvitation from '../components/invitation/CustomizableInvitation';
+import EventDetails from '../components/events/EventDetails';
 const AppRoutes = () => {
   return (
     <Routes>

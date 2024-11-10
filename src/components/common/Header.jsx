@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../cssS/Header.css";
-import "../../src/index.css";
-import BackButton from "../components/features/BackButton";
-import logo from "../fotos/logo.jpg";
-import logoSvg from "../fotos/logo.svg";
+import "../../styles/components/Header.css";
+import "../../../src/index.css";
+import BackButton from "./BackButton";
+import logoSvg from "../../assets/images/logo.svg";
 import { Menu, X } from 'lucide-react';
 import { FaUserCircle } from 'react-icons/fa';
-import { getCurrentUser, validateToken, initializeActivityListener, clearAllUserData, isTokenPresent } from '../utils/authUtils';
+import { getCurrentUser, validateToken, initializeActivityListener, clearAllUserData, isTokenPresent } from '../../utils/authUtils';
 
 function Header() {
   const navigate = useNavigate();

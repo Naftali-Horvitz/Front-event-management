@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import StyledLink from "../StyledLink";
-import '../../../src/cssS/Host.css';
+import StyledLink from "../common/StyledLink";
+import '../../styles/components/Host.css';
 
 function Host() {
   useEffect(() => {
