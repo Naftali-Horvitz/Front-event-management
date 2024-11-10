@@ -4,6 +4,7 @@ import axios from 'axios';
 import { PlusCircle, Calendar, Users, Check, Clock } from 'lucide-react';
 import config from "../../config.js";
 import { validateToken, getCurrentUser } from "../../utils/authUtils.js";
+import { getUserData } from "../../utils/storageUtils.js";
 
 // // תצוגה מקדימה של כיצד הדף ייראה
 // const previewData = [
@@ -87,7 +88,6 @@ function ViewEvents() {
           headers: { Authorization: `Bearer ${getCurrentUser().token}` }
         });
         setEvents(response.data);
-        console.log(response.data);
       } catch (err) {
         setError(err.response?.data?.message || 'שגיאה בטעינת האירועים');
       } finally {
@@ -97,40 +97,33 @@ function ViewEvents() {
 
     checkAuthAndFetchEvents();
   }, []);
-  const handleEventClick = async () => {
-    setErrorMessage("");
-
+  const handleEventClick = async (eventId) => {
+    const idEvent = eventId;
     if (!validateToken()) {
       setIsTokenValid(false);
-      setErrorMessage("התחבר מחדש");
-      setIsCreating(false);
       return;
     }
-
     try {
-      const response = await axios.get(
-        `${port}/event/${eventId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${getCurrentUser().token}`,
-          },
-        }
-      );
-      navigate("/successMessage", {
-        state: {
-          hostName: hostName,
-          eventId: eventId,
-          eventName: response.eventName,
-          eventDescription: response.eventDescription,
-          eventLocation: response.eventLocation,
-          eventDate: response.eventDate,
-        },
+      const response = await axios.get(`${port}/events/event/${idEvent}`, {
+        headers: { Authorization: `Bearer ${getCurrentUser().token}` }
       });
+      if (response.data) {
+        navigate("/successMessage", {
+          state: {
+            hostName: "KJN",
+            eventId: eventId,
+            eventName: response.data.eventName,
+            eventDescription: response.data.eventDescription,
+            eventLocation: response.data.eventLocation,
+            eventDate: response.data.eventDate,
+          },
+        });
+      }
     } catch (error) {
       console.error(error);
-      setErrorMessage("שגיאה בטעינת האירוע.");
+      setError("שגיאה בטעינת האירוע.");
     } finally {
-      setIsCreating(false);
+      setLoading(false);
     }
   };
   // פונקציה לחישוב סטטוס האירוע
@@ -247,7 +240,7 @@ function ViewEvents() {
           <div className="relative group">
             <button
               className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-600 rounded-md hover:bg-green-100 transition-colors"
-              onClick={() => handleEventClick()}
+              onClick={() => handleEventClick(event._id)}
             >
               <Users size={16} />
               הזמן אורח
