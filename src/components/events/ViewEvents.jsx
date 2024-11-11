@@ -104,8 +104,7 @@ function ViewEvents() {
       return;
     }
     try {
-      const response = await axios.get(`${port}/events/view-events`, {
-        params: { eventId: idEvent },
+      const response = await axios.get(`${port}/events/view-events/${idEvent}`, {
         headers: { Authorization: `Bearer ${getCurrentUser().token}` }
       });
       if (response.data) {
