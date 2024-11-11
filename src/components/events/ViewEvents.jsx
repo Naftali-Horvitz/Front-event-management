@@ -104,13 +104,15 @@ function ViewEvents() {
       return;
     }
     try {
-      const response = await axios.get(`${port}/events/event/${idEvent}`, {
+      const response = await axios.get(`${port}/events/view-events`, {
+        params: { eventId: idEvent },
         headers: { Authorization: `Bearer ${getCurrentUser().token}` }
       });
       if (response.data) {
+        console.log(response.data);
         navigate("/successMessage", {
           state: {
-            hostName: "KJN",
+            // hostName: response.data.hostName,
             eventId: eventId,
             eventName: response.data.eventName,
             eventDescription: response.data.eventDescription,
