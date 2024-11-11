@@ -124,14 +124,13 @@ function GuestForm() {
                 <div className="relative">
                   <Phone className="absolute top-3 right-3 h-5 w-5 text-gray-400" />
                   <input
-                    type="tel"
+                    type="email"
                     name="email"
                     placeholder="אימייל"
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 pr-10 rounded-lg border border-gray-200 bg-white/50 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none"
-                  />
+                    className="w-full px-4 py-3 pl-10 rounded-lg border border-gray-200 bg-white/50 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none"                  />
                 </div>
               </div>
 
