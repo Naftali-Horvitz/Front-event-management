@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
 
+
 // Components
 import Home from '../components/common/Home';
 import Host from '../components/host/Host';
