@@ -21,6 +21,7 @@ const SuccessMessage = () => {
 
   const port = config.backendUrl;
   const registrationUrl = `https://test-7ft1.onrender.com/guest/${eventId}`;
+  const registrationUrlLocal = `http://localhost:3000/guest/${eventId}`;
 
   const messageHtml = `
     <h2>הזמנה לאירוע</h2>

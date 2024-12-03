@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Loader2, User, Phone } from "lucide-react";
@@ -17,6 +17,9 @@ function GuestForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
 
+  useEffect(() => {
+    console.log(isRegistered);
+  }, [isLoading]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -28,14 +31,15 @@ function GuestForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setMessage("");
     try {
       const response = await axios.post(
         `${port}/guest/${eventId}`,
         formData
       );
-      if (response.status === 200) {
-        setMessage("ההרשמה בוצעה בהצלחה!");
+      if (response.status === 201) {
         setIsRegistered(true);
+        setMessage("ההרשמה בוצעה בהצלחה! קוד QR נשלח למייל שלך.");
       }
     } catch (error) {
       if (error.response && error.response.data.msg) {
@@ -130,7 +134,7 @@ function GuestForm() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 pl-10 rounded-lg border border-gray-200 bg-white/50 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none"                  />
+                    className="w-full px-4 py-3 pl-10 rounded-lg border border-gray-200 bg-white/50 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none" />
                 </div>
               </div>
 

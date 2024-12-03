@@ -6,34 +6,6 @@ import config from "../../config.js";
 import { validateToken, getCurrentUser } from "../../utils/authUtils.js";
 import { getUserData } from "../../utils/storageUtils.js";
 
-// // תצוגה מקדימה של כיצד הדף ייראה
-// const previewData = [
-//   {
-//     _id: '1',
-//     eventName: 'חתונה של דני ורותי',
-//     date: '2024-12-20',
-//     totalGuests: 250,
-//     confirmedGuests: 180,
-//     type: 'wedding'
-//   },
-//   {
-//     _id: '2',
-//     eventName: 'בר מצווה - יוסף כהן',
-//     date: '2024-06-15',
-//     totalGuests: 150,
-//     confirmedGuests: 120,
-//     type: 'bar_mitzvah'
-//   },
-//   {
-//     _id: '3',
-//     eventName: 'מסיבת אירוסין',
-//     date: '2024-04-01',
-//     totalGuests: 100,
-//     confirmedGuests: 85,
-//     type: 'engagement'
-//   }
-// ];
-
 function ViewEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
