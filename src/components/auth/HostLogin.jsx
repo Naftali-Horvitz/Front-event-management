@@ -50,6 +50,7 @@ const HostLogin = () => {
 
     try {
       const response = await axios.post(`${port}/user/login`, formData);
+      console.log(response.data);
       // שמירת המידע החדש (מנקה אוטומטית מידע קודם)
       setNewUserData(
         response.data.token,

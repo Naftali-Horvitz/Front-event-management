@@ -23,7 +23,7 @@ const HostOptions = () => {
     if (!isTokenPresent()) {
       setErrorMessage("אין הרשאת גישה. מעביר לדף ההתחברות...");
       setTimeout(() => {
-        navigate("/");
+        navigate("/loginhost");
       }, 2000);
       return;
     }

@@ -1,4 +1,4 @@
-// utils/authUtils.js
+import { jwtDecode } from "jwt-decode";
 
 // ניקוי כל המידע מה-localStorage 
 export const clearAllUserData = () => {
@@ -58,15 +58,24 @@ export const validateToken = () => {
 
   const currentTime = new Date().getTime();
   const lastActivity = tokenData.lastActivity;
-  const fiveMinutes = 5 * 60 * 1000; // 5 דקות במילישניות
+  const fiveMinutes = 5 * 60 * 1000;
 
-  // בודק אם עברו יותר מ-5 דקות מאז הפעילות האחרונה
   if (currentTime - lastActivity > fiveMinutes) {
-    clearAllUserData(); // מוחק את כל המידע אם פג תוקפו
+    clearAllUserData();
     return false;
   }
 
-  // מעדכן את זמן הפעילות האחרונה
+  try {
+    // בדיקת תוקף הטוקן JWT עצמו
+    const decoded = jwtDecode(tokenData.token);
+    if (decoded.exp * 1000 < currentTime) {
+      clearAllUserData();
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
+
   updateLastActivity();
   return true;
 };

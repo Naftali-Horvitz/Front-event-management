@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { PlusCircle, Calendar, Users, Check, Clock } from 'lucide-react';
 import config from "../../config.js";
-import { validateToken, getCurrentUser } from "../../utils/authUtils.js";
+import { validateToken, getCurrentUser, isTokenPresent } from "../../utils/authUtils.js";
 import { getUserData } from "../../utils/storageUtils.js";
 
 function ViewEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setErrorMessage] = useState(null);
   const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
   const port = config.backendUrl;
@@ -51,17 +51,18 @@ function ViewEvents() {
   useEffect(() => {
     const checkAuthAndFetchEvents = async () => {
       if (!validateToken()) {
+        setErrorMessage("התחבר מחדש");
         navigate('/loginhost');
         return;
       }
-
       try {
         const response = await axios.get(`${port}/events/view-events`, {
-          headers: { Authorization: `Bearer ${getCurrentUser().token}` }
+          headers: { Authorization: `Bearer ${getCurrentUser().token}` },
+
         });
         setEvents(response.data);
       } catch (err) {
-        setError(err.response?.data?.message || 'שגיאה בטעינת האירועים');
+        setErrorMessage(err.response?.data?.message || 'שגיאה בטעינת האירועים');
       } finally {
         setLoading(false);
       }
@@ -73,6 +74,8 @@ function ViewEvents() {
     const idEvent = eventId;
     if (!validateToken()) {
       setIsTokenValid(false);
+      setErrorMessage("התחבר מחדש");
+      navigate('/loginhost');
       return;
     }
     try {
@@ -80,7 +83,6 @@ function ViewEvents() {
         headers: { Authorization: `Bearer ${getCurrentUser().token}` }
       });
       if (response.data) {
-        console.log(response.data);
         navigate("/successMessage", {
           state: {
             // hostName: response.data.hostName,
@@ -94,7 +96,7 @@ function ViewEvents() {
       }
     } catch (error) {
       console.error(error);
-      setError("שגיאה בטעינת האירוע.");
+      setErrorMessage("שגיאה בטעינת האירוע.");
     } finally {
       setLoading(false);
     }
