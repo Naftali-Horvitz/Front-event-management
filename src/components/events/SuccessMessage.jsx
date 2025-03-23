@@ -4,8 +4,12 @@ import { FaWhatsapp, FaShareAlt } from "react-icons/fa";
 import { MdEmail, MdContentCopy } from "react-icons/md";
 import { Calendar, MapPin, User, FileText } from "lucide-react";
 import config from "../../config.js";
+import { getCurrentUser } from '../../utils/authUtils';
 
 const SuccessMessage = () => {
+
+  const { hostName } = getCurrentUser();
+
   const location = useLocation();
   const {
     eventId,
@@ -13,7 +17,6 @@ const SuccessMessage = () => {
     eventLocation,
     eventDate,
     eventDescription,
-    hostName,
   } = location.state || {};
 
   const [copySuccess, setCopySuccess] = useState("");

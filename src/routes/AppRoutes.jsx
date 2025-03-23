@@ -18,6 +18,7 @@ import ContactPage from '../components/common/ContactPage';
 import AboutPage from '../components/common/AboutPage';
 import CustomizableInvitation from '../components/invitation/CustomizableInvitation';
 import EventDetails from '../components/events/EventDetails';
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -29,7 +30,6 @@ const AppRoutes = () => {
         <Route path="/hostOptions" element={<HostOptions />} />
         <Route path="/create-event" element={<CreateEvent />} />
         <Route path="/view-events" element={<ViewEvents />} />
-        <Route path="/guest/:eventId" element={<GuestForm />} />
         <Route path="/successMessage" element={<SuccessMessage />} />
         <Route path="/customizableInvitation" element={<CustomizableInvitation />} />
         <Route path="/contactPage" element={<ContactPage />} />
@@ -41,6 +41,7 @@ const AppRoutes = () => {
       <Route element={<AuthLayout />}>
         <Route path="/signuphost" element={<SignupHost />} />
         <Route path="/loginhost" element={<HostLogin />} />
+        <Route path="/guest/:eventId" element={<GuestForm />} />
       </Route>
     </Routes>
   );

@@ -13,7 +13,7 @@ const BackButton = () => {
   }
 
   return (
-    <button
+    <button 
       onClick={handleBack}
       className="p-1 md:p-2 text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
       aria-label="חזור לדף הקודם"

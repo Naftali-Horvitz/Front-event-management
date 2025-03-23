@@ -50,7 +50,6 @@ const HostLogin = () => {
 
     try {
       const response = await axios.post(`${port}/user/login`, formData);
-      console.log(response.data);
       // שמירת המידע החדש (מנקה אוטומטית מידע קודם)
       setNewUserData(
         response.data.token,
@@ -95,56 +94,57 @@ const HostLogin = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
-      {/* Animated background circles */}
-      <div className="absolute inset-0 z-0 opacity-50">
-        <div className="absolute w-72 h-72 rounded-full bg-gradient-to-r from-blue-100/10 to-blue-500/10 -top-24 -right-24 animate-float"></div>
-        <div className="absolute w-48 h-48 rounded-full bg-gradient-to-r from-blue-100/10 to-blue-500/10 -bottom-12 -left-12 animate-float-delay-2"></div>
-        <div className="absolute w-36 h-36 rounded-full bg-gradient-to-r from-blue-100/10 to-blue-500/10 top-1/2 right-1/4 animate-float-delay-4"></div>
-      </div>
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
-        <div className="w-full max-w-md space-y-8 animate-fadeInUp">
-          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-800 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">
-            התחברות
-          </h1>
+    <div style={{width: '95%'}}>
+      <div className="min-h-96 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
+        {/* Animated background circles */}
+        <div className="absolute inset-0 z-0 opacity-50">
+          <div className="absolute w-72 h-72 rounded-full bg-gradient-to-r from-blue-100/10 to-blue-500/10 -top-24 -right-24 animate-float"></div>
+          <div className="absolute w-48 h-48 rounded-full bg-gradient-to-r from-blue-100/10 to-blue-500/10 -bottom-12 -left-12 animate-float-delay-2"></div>
+          <div className="absolute w-36 h-36 rounded-full bg-gradient-to-r from-blue-100/10 to-blue-500/10 top-1/2 right-1/4 animate-float-delay-4"></div>
+        </div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-96 px-4">
+          <div className="w-full max-w-md space-y-8 animate-fadeInUp">
+            <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-800 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">
+              התחברות
+            </h1>
 
-          <div className="bg-white/80 backdrop-blur-lg rounded-xl shadow-xl p-8 space-y-6 border border-white/20 animate-fadeInUp transition-transform hover:translate-y-[-2px]">
-            <form onSubmit={handleSubmit} className="space-y-6" dir="rtl">
-              {renderField("email", "אימייל", "email")}
-              {renderField("password", "סיסמה", "password")}
+            <div className="bg-white/80 backdrop-blur-lg rounded-xl shadow-xl p-8 space-y-6 border border-white/20 animate-fadeInUp transition-transform hover:translate-y-[-2px]">
+              <form onSubmit={handleSubmit} className="space-y-6" dir="rtl">
+                {renderField("email", "אימייל", "email")}
+                {renderField("password", "סיסמה", "password")}
 
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium 
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium 
                          hover:translate-y-[-2px] hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0
                          transition-all duration-300 relative overflow-hidden"
-              >
-                {isLoading ? (
-                  <div className="flex items-center justify-center">
-                    <Loader2 className="animate-spin ml-2" size={20} />
-                    <span>מתחבר...</span>
-                  </div>
-                ) : (
-                  "התחבר"
-                )}
-                <div className="absolute inset-0 w-full h-full bg-white/20 scale-0 rounded-full opacity-0 hover:scale-100 hover:opacity-100 transition-all duration-500 transform origin-center"></div>
-              </button>
-            </form>
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="animate-spin ml-2" size={20} />
+                      <span>מתחבר...</span>
+                    </div>
+                  ) : (
+                    "התחבר"
+                  )}
+                  <div className="absolute inset-0 w-full h-full bg-white/20 scale-0 rounded-full opacity-0 hover:scale-100 hover:opacity-100 transition-all duration-500 transform origin-center"></div>
+                </button>
+              </form>
 
-            {message && (
-              <div className={`text-center text-sm animate-fadeInUp ${message === "התחברת בהצלחה"
-                ? "text-green-600"
-                : "text-red-600"
-                }`}>
-                {message}
-              </div>
-            )}
+              {message && (
+                <div className={`text-center text-sm animate-fadeInUp ${message === "התחברת בהצלחה"
+                  ? "text-green-600"
+                  : "text-red-600"
+                  }`}>
+                  {message}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      <style jsx global>{`
+        <style jsx global>{`
         @keyframes float {
           0%, 100% { transform: translate(0, 0) rotate(0deg); }
           25% { transform: translate(10px, -10px) rotate(5deg); }
@@ -168,6 +168,7 @@ const HostLogin = () => {
         .animate-float-delay-4 { animation: float 20s infinite -10s; }
         .animate-fadeInUp { animation: fadeInUp 1s ease-out; }
       `}</style>
+      </div>
     </div>
   );
 };

@@ -1,23 +1,35 @@
 /* AuthLayout.css */
 .auth-container {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  }
-  
+  height: 100vh;
+  max-width: 100vw;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: first baseline;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+.main-content{
+display: flex;
+justify-content: center;
+}
+
+.auth-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-height: max-content;
+  max-width: max-content;
+  max-width: 28rem;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 0px;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* @media (max-width: 640px) {
   .auth-content {
-    flex: 1;
-    width: 100%;
-    max-width: 28rem;
-    margin: 2rem auto;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin: 1rem;
+    padding: 1rem;
   }
-  
-  @media (max-width: 640px) {
-    .auth-content {
-      margin: 1rem;
-      padding: 1rem;
-    }
-  }
+} */

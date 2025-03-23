@@ -6,12 +6,14 @@ import BackButton from '../components/common/BackButton.jsx';
 const AuthLayout = () => {
   return (
     <div className="auth-container">
-      <div className="p-4">
+      <div >
         <BackButton />
       </div>
-      <main className="auth-content">
-        <Outlet />
-      </main>
+      <div className="main-content">
+        <main className="auth-content">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };
