@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { PlusCircle, Calendar, Users, Check, Clock } from 'lucide-react';
 import config from "../../config.js";
-import { validateToken, getCurrentUser, isTokenPresent } from "../../utils/authUtils.js";
-import { getUserData } from "../../utils/storageUtils.js";
+import { validateToken, getCurrentUser } from "../../utils/authUtils.js";
+import { useEventContext } from '../../context/eventDataContext.jsx';
 
 function ViewEvents() {
+
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setErrorMessage] = useState(null);
   const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
   const port = config.backendUrl;
-
+  const { updateEventData, eventData, hostName } = useEventContext();
   // חישוב סטטיסטיקות
   const stats = {
     totalEvents: events.length,
@@ -49,16 +50,10 @@ function ViewEvents() {
     })()
   };
   useEffect(() => {
-    const checkAuthAndFetchEvents = async () => {
-      if (!validateToken()) {
-        setErrorMessage("התחבר מחדש");
-        navigate('/loginhost');
-        return;
-      }
+    const fetchEvents = async () => {
       try {
         const response = await axios.get(`${port}/events/view-events`, {
           headers: { Authorization: `Bearer ${getCurrentUser().token}` },
-
         });
         setEvents(response.data);
       } catch (err) {
@@ -68,10 +63,9 @@ function ViewEvents() {
       }
     };
 
-    checkAuthAndFetchEvents();
+    fetchEvents();
   }, []);
   const handleEventClick = async (eventId) => {
-    const idEvent = eventId;
     if (!validateToken()) {
       setIsTokenValid(false);
       setErrorMessage("התחבר מחדש");
@@ -79,20 +73,15 @@ function ViewEvents() {
       return;
     }
     try {
-      const response = await axios.get(`${port}/events/${idEvent}`, {
+      const response = await axios.get(`${port}/events/${eventId}`, {
         headers: { Authorization: `Bearer ${getCurrentUser().token}` }
       });
       if (response.data) {
-        navigate("/successMessage", {
-          state: {
-            // hostName: response.data.hostName,
-            eventId: eventId,
-            eventName: response.data.eventName,
-            eventDescription: response.data.eventDescription,
-            eventLocation: response.data.eventLocation,
-            eventDate: response.data.eventDate,
-          },
+        updateEventData({
+          ...response.data,
+          eventId: eventId
         });
+        navigate("/successMessage");
       }
     } catch (error) {
       console.error(error);
@@ -100,6 +89,18 @@ function ViewEvents() {
     } finally {
       setLoading(false);
     }
+  };
+  const handleDetailsClick = async (eventId) => {
+    if (!validateToken()) {
+      setIsTokenValid(false);
+      setErrorMessage("התחבר מחדש");
+      navigate('/loginhost');
+      return;
+    }
+    updateEventData({
+      eventId: eventId
+    });
+    navigate(`/eventDetails`);
   };
   // פונקציה לחישוב סטטוס האירוע
   const getEventStatus = (date) => {
@@ -123,7 +124,6 @@ function ViewEvents() {
       daysText: 'בעוד ' + daysUntilEvent + ' ימים'
     };
   };
-
   // קומפוננטת קארד סטטיסטיקה
   const StatCard = ({ icon: Icon, title, value, color = "blue" }) => (
     <div className="bg-white p-4 rounded-lg shadow">
@@ -134,7 +134,6 @@ function ViewEvents() {
       <p className="text-2xl font-bold">{value}</p>
     </div>
   );
-
   // קומפוננטת קארד אירוע
   const EventCard = ({ event }) => {
     const status = getEventStatus(event.date);
@@ -206,7 +205,7 @@ function ViewEvents() {
 
         <div className="flex gap-2 mt-4">
           <button
-            onClick={() => navigate(`/EventDetails/${event._id}`)}
+            onClick={() => handleDetailsClick(event._id)}
             className="flex-1 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors"
           >
             צפה בפרטים

@@ -1,0 +1,307 @@
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 4xl;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Headings */
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .sectionTitle {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* File Upload */
+  .uploadSection {
+    margin-bottom: 1.5rem;
+  }
+  
+  .fileInputWrapper {
+    position: relative;
+  }
+  
+  .fileInput {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .uploadButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .uploadButton:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .uploadButtonDisabled {
+    background-color: #93c5fd;
+    cursor: not-allowed;
+  }
+  
+  .buttonIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .spinner {
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid white;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .uploadDescription {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+    text-align: center;
+  }
+  
+  /* Table Styles */
+  .previewSection {
+    margin-bottom: 1.5rem;
+  }
+  
+  .tableContainer {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .tableWrapper {
+    overflow-x: auto;
+    max-height: 350px;
+  }
+  
+  .table {
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .tableHeader {
+    background-color: #f9fafb;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .tableHeaderCell {
+    padding: 0.75rem 1.5rem;
+    text-align: right;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .tableCell {
+    padding: 1rem 1.5rem;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    color: #374151;
+  }
+  
+  .tableCell:first-child {
+    font-weight: 500;
+  }
+  
+  .ltr {
+    direction: ltr;
+    text-align: left;
+  }
+  
+  .invalidRow {
+    background-color: #fee2e2;
+  }
+  
+  .missingField {
+    color: #ef4444;
+  }
+  
+  .emptyField {
+    color: #9ca3af;
+  }
+  
+  .editInput {
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    width: 100%;
+  }
+  
+  /* Status Badges */
+  .validBadge {
+    padding: 0 0.5rem;
+    display: inline-flex;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background-color: #d1fae5;
+    color: #065f46;
+  }
+  
+  .invalidBadge {
+    padding: 0 0.5rem;
+    display: inline-flex;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  
+  /* Action Buttons */
+  .actionButtons {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .saveButton {
+    color: #059669;
+    padding: 0.25rem;
+  }
+  
+  .saveButton:hover {
+    color: #047857;
+  }
+  
+  .cancelButton {
+    color: #dc2626;
+    padding: 0.25rem;
+  }
+  
+  .cancelButton:hover {
+    color: #b91c1c;
+  }
+  
+  .editButton {
+    color: #2563eb;
+    padding: 0.25rem;
+  }
+  
+  .editButton:hover {
+    color: #1d4ed8;
+  }
+  
+  .actionIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  /* Summary Section */
+  .summarySection {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+  }
+  
+  .badgeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .badge {
+    padding: 0 0.75rem;
+    height: 1.75rem;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: #4b5563;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .validBadgeSmall {
+    color: #047857;
+  }
+  
+  .invalidBadgeSmall {
+    color: #b91c1c;
+  }
+  
+  .warningText {
+    font-size: 0.875rem;
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+  }
+  
+  .warningIcon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+    display: inline-block;
+  }
+  
+  /* Save Section */
+  .saveSection {
+    margin-top: 1.5rem;
+  }
+  
+  .saveAllButton {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #10b981;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .saveAllButton:hover {
+    background-color: #059669;
+  }
+  
+  .saveAllButtonDisabled {
+    background-color: #d1d5db;
+    color: #6b7280;
+    cursor: not-allowed;
+  }

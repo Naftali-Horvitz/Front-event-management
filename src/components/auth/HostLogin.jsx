@@ -4,24 +4,26 @@ import axios from "axios";
 import { Loader2 } from "lucide-react";
 import config from "../../../src/config";
 import { validateLoginField, validateLoginForm } from "../../utils/validation";
-import { setNewUserData, isTokenPresent } from "../../utils/authUtils";
+import { setNewUserData, isTokenPresent, getCurrentUser } from "../../utils/authUtils";
+import { useEventContext } from "../../context/eventDataContext";
+import { useAuth } from "../../context/AuthContext";
 
 const HostLogin = () => {
+
+  const { setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
-
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const port = config.backendUrl;
-
+  const { setHostName } = useEventContext();
   useEffect(() => {
     if (isTokenPresent()) {
       navigate("/");
@@ -54,10 +56,12 @@ const HostLogin = () => {
       setNewUserData(
         response.data.token,
         response.data.user.fullName,
-        response.data.user.userId
+        response.data.user._id
       );
+      localStorage.setItem("token", response.data.token);
+      setIsAuthenticated(true);
+      setHostName(getCurrentUser().hostName);
       setMessage("התחברת בהצלחה");
-
       // הצג הודעת הצלחה ועבור לדף הבית אחרי 2 שניות
       setTimeout(() => {
         navigate("/hostOptions");

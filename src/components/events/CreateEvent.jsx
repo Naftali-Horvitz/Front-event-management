@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import { Calendar, MapPin, FileText, Tag } from "lucide-react";
 import { validateToken,getCurrentUser} from "../../utils/authUtils.js";
+import axios from "axios";
 import config from "../../config.js";
+import { useEventContext } from "../../context/eventDataContext";
 
 function CreateEvent() {
+  const { updateEventData } = useEventContext();
   const navigate = useNavigate();
-  const location = useLocation();
   const [isCreating, setIsCreating] = useState(false);
   const [isTokenValid, setIsTokenValid] = useState(true);
   const [formData, setFormData] = useState({
     eventName: "",
     eventDate: "",
+    eventTime:"",
     eventLocation: "",
     eventDescription: "",
-    hostId: location.state?.hostId || "",
+    hostId: getCurrentUser().hostId,
   });
-  const hostName = location.state?.hostName || "";
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const port = config.backendUrl;
@@ -58,19 +59,11 @@ function CreateEvent() {
           },
         }
       );
-      const eventId = response.data.eventId;
       setSuccessMessage("האירוע נוצר בהצלחה!");
+      const eventId = response.data.eventId;
+      updateEventData({eventId, ...formData });
       setTimeout(() => {
-        navigate("/successMessage", {
-          state: {
-            hostName: hostName,
-            eventId: eventId,
-            eventName: formData.eventName,
-            eventDescription: formData.eventDescription,
-            eventLocation: formData.eventLocation,
-            eventDate: formData.eventDate,
-          },
-        });
+        navigate("/successMessage");
       }, 1000);
     } catch (error) {
       console.error("Error creating event:", error);
@@ -135,6 +128,21 @@ function CreateEvent() {
                   />
                 </div>
 
+                {/* Event time */}
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-gray-700 font-medium">
+                    זמן האירוע
+                  </label>
+                  <input
+                    type="time"
+                    name="eventTime"
+                    value={formData.eventTime}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  />
+                </div>
+
                 {/* Event Location */}
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-gray-700 font-medium">
@@ -167,7 +175,6 @@ function CreateEvent() {
                     placeholder="הכנס את תיאור האירוע"
                   />
                 </div>
-
                 {errorMessage && (
                   <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">
                     {errorMessage}

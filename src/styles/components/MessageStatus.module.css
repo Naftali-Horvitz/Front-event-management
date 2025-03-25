@@ -1,0 +1,44 @@
+  /* Messages */
+  .message {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .errorMessage {
+    background-color: #fee2e2;
+    color: #b91c1c;
+  }
+  
+  .successMessage {
+    background-color: #ecfdf5;
+    color: #047857;
+  }
+  
+  .messageContent {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .messageIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .closeButton {
+    color: #6b7280;
+  }
+  
+  .closeButton:hover {
+    color: #374151;
+  }
+  
+  .closeIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+  

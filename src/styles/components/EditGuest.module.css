@@ -1,0 +1,45 @@
+.tableCell {
+    padding: 3px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.editInput {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.validBadge {
+    color: green;
+    font-weight: bold;
+}
+
+.invalidBadge {
+    color: red;
+    font-weight: bold;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.saveButton, .cancelButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.saveButton{
+    color: green;
+}
+
+.cancelButton{
+    color: red;
+}
+
+.invalidRow {
+    background-color: #ffefef;
+}

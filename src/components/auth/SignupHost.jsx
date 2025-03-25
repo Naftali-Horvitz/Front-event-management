@@ -5,7 +5,13 @@ import { Loader2 } from "lucide-react";
 import config from "../../../src/config";
 import { validateField, validateForm } from "../../utils/validation";
 import { setNewUserData, isTokenPresent } from "../../utils/authUtils";
+import { useEventContext } from "../../context/eventDataContext";
+import { useAuth } from "../../context/AuthContext";
+
 const SignupForm = () => {
+
+  const { setIsAuthenticated } = useAuth();
+  const { setHostName } = useEventContext();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -14,7 +20,6 @@ const SignupForm = () => {
     password: "",
     email: "",
   });
-
   const [errors, setErrors] = useState({
     fullName: "",
     userId: "",
@@ -22,7 +27,6 @@ const SignupForm = () => {
     password: "",
     email: "",
   });
-
   const [isRegistering, setIsRegistering] = useState(false);
   const [message, setMessage] = useState("");
   const port = config.backendUrl;
@@ -54,9 +58,12 @@ const SignupForm = () => {
       const response = await axios.post(`${port}/user/register`, formData);
       setNewUserData(
         response.data.token,
-        formData.fullName,
-        formData.userId
+        response.data.user.fullName,
+        response.data.user._id
       );
+      setIsAuthenticated(true);
+      localStorage.setItem("token", response.data.token);
+      setHostName(response.data.user.fullName);
       setMessage("ההרשמה הצליחה!");
       navigate("/hostOptions");
     } catch (error) {
