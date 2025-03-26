@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
-import EventContextProvider from '../context/eventDataContext';
+import EventContextProvider from '../context/EventDataContext';
 import PrivateRoute from '../context/AuthContext';
 
 // Components

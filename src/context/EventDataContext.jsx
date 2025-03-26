@@ -49,17 +49,3 @@ export const EventContextProvider = ({ children }) => {
     </EventContext.Provider>
   );
 };
-
-// // דוגמה לשימוש
-// export const EventComponent = () => {
-//   const { eventData, updateEventData } = useEventContext();
-  
-//   return (
-//     <div>
-//       <h2>{eventData.eventName || 'אין שם לאירוע'}</h2>
-//       <button onClick={() => updateEventData({ eventName: 'אירוע חדש' })}>
-//         עדכן שם אירוע
-//       </button>
-//     </div>
-//   );
-// };
