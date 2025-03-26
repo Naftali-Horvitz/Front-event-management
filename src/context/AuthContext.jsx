@@ -1,41 +1,52 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    if (!isTokenExpired(token)) {
+  const checkAuth = () => {
+    const token = localStorage.getItem('token');
+    if (token && !isTokenExpired(token)) {
       setIsAuthenticated(true);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } else {
       setIsAuthenticated(false);
       localStorage.removeItem('token');
+      delete axios.defaults.headers.common['Authorization'];
     }
+  };
+
+  useEffect(() => {
+    checkAuth();
   }, []);
-  
-  function isTokenExpired(token) {
+
+  const isTokenExpired = (token) => {
     if (!token) return true;
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      const expiry = payload.exp * 1000; // תיקון ההמרה למילישניות
+      const expiry = payload.exp * 1000;
       return Date.now() >= expiry;
     } catch (e) {
       return true;
     }
-  }
+  };
 
   const logout = () => {
-    localStorage.clear();
+    localStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
     setIsAuthenticated(false);
   };
 
+  const login = (token) => {
+    localStorage.setItem('token', token);
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    setIsAuthenticated(true);
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, login, logout, checkAuth }}>
       {children}
     </AuthContext.Provider>
   );

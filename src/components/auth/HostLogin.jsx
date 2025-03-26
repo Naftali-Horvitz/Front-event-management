@@ -10,7 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const HostLogin = () => {
 
-  const { setIsAuthenticated } = useAuth();
+  const { setIsAuthenticated, login } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -24,11 +24,13 @@ const HostLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const port = config.backendUrl;
   const { setHostName } = useEventContext();
+
   useEffect(() => {
     if (isTokenPresent()) {
       navigate("/");
     }
   }, [navigate]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -50,8 +52,10 @@ const HostLogin = () => {
 
     setIsLoading(true);
 
+
     try {
       const response = await axios.post(`${port}/user/login`, formData);
+      login(res.data.token);
       // שמירת המידע החדש (מנקה אוטומטית מידע קודם)
       setNewUserData(
         response.data.token,
@@ -98,7 +102,7 @@ const HostLogin = () => {
   );
 
   return (
-    <div style={{width: '95%'}}>
+    <div style={{ width: '95%' }}>
       <div className="min-h-96 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
         {/* Animated background circles */}
         <div className="absolute inset-0 z-0 opacity-50">

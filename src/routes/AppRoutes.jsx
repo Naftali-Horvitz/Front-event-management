@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
 import { EventContextProvider } from '../context/EventDataContext';
-import { PrivateRoute } from '../context/AuthContext';
+import { AuthProvider } from '../context/AuthContext';
 
 // Components
 import Home from '../components/common/Home';
@@ -35,7 +35,7 @@ const AppRoutes = () => {
           <Route path="/host" element={<Host />} />
 
           {/* Private Routes - נגישים רק למשתמשים מחוברים */}
-          <Route element={<PrivateRoute />}>
+          <Route element={<AuthProvider />}>
             <Route path="/hostOptions" element={<HostOptions />} />
             <Route path="/create-event" element={<CreateEvent />} />
             <Route path="/view-events" element={<ViewEvents />} />
