@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
 import { EventContextProvider } from '../context/eventDataContext';
-import PrivateRoute from '../components/auth/PrivateRoute'; // ייבוא של קומפוננט PrivateRoute
+import PrivateRoute from '../context/AuthContext';
 
 // Components
 import Home from '../components/common/Home';
