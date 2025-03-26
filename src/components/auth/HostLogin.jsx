@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import config from "../../../src/config";
 import { validateLoginField, validateLoginForm } from "../../utils/validation";
 import { setNewUserData, isTokenPresent, getCurrentUser } from "../../utils/authUtils";
-import { useEventContext } from "../../context/eventDataContext";
+import { useEventContext } from "../../context/EventDataContext";
 import { useAuth } from "../../context/AuthContext";
 
 const HostLogin = () => {
