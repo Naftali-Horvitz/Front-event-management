@@ -49,13 +49,10 @@ const HostLogin = () => {
       setErrors(validationErrors);
       return;
     }
-
     setIsLoading(true);
-
-
     try {
       const response = await axios.post(`${port}/user/login`, formData);
-      login(res.data.token);
+      login(response.data.token);
       // שמירת המידע החדש (מנקה אוטומטית מידע קודם)
       setNewUserData(
         response.data.token,

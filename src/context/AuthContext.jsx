@@ -4,9 +4,10 @@ import axios from 'axios';
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const checkAuth = () => {
+  useEffect(() => {
     const token = localStorage.getItem('token');
     if (token && !isTokenExpired(token)) {
       setIsAuthenticated(true);
@@ -16,11 +17,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('token');
       delete axios.defaults.headers.common['Authorization'];
     }
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  }, [isAuthenticated]);
 
   const isTokenExpired = (token) => {
     if (!token) return true;
@@ -43,10 +40,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setIsAuthenticated(true);
+    console.log(isAuthenticated)
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, login, logout, checkAuth }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

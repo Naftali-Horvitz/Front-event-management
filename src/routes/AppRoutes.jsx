@@ -1,60 +1,128 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { Suspense, useState, useEffect } from 'react';
+import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
-import { EventContextProvider } from '../context/EventDataContext';
-import { AuthProvider } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
+
+const LoadingFallback = () => (
+  <div className="loading-spinner">Loading...</div>
+);
 
 // Components
-import Home from '../components/common/Home';
-import Host from '../components/host/Host';
-import GuestForm from '../components/guests/GuestForm';
-import SignupHost from '../components/auth/SignupHost';
-import HostLogin from '../components/auth/HostLogin';
-import HostOptions from '../components/host/HostOptions';
-import CreateEvent from '../components/events/CreateEvent';
-import SuccessMessage from '../components/events/SuccessMessage';
-import ViewEvents from '../components/events/ViewEvents';
-import ContactPage from '../components/common/ContactPage';
-import AboutPage from '../components/common/AboutPage';
-import CustomizableInvitation from '../components/invitation/CustomizableInvitation';
-import EventDetails from '../components/events/EventDetails';
-import UploadGuestList from '../components/events/UploadGuestList';
+const Home = React.lazy(() => import( '../components/common/Home'));
+const Host = React.lazy(() => import( '../components/host/Host'));
+const GuestForm = React.lazy(() => import( '../components/guests/GuestForm'));
+const SignupHost = React.lazy(() => import( '../components/auth/SignupHost'));
+const HostLogin = React.lazy(() => import( '../components/auth/HostLogin'));
+const HostOptions = React.lazy(() => import( '../components/host/HostOptions'));
+const CreateEvent = React.lazy(() => import( '../components/events/CreateEvent'));
+const SuccessMessage = React.lazy(() => import( '../components/events/SuccessMessage'));
+const ViewEvents = React.lazy(() => import( '../components/events/ViewEvents'));
+const ContactPage = React.lazy(() => import( '../components/common/ContactPage'));
+const AboutPage = React.lazy(() => import( '../components/common/AboutPage'));
+const CustomizableInvitation = React.lazy(() => import( '../components/invitation/CustomizableInvitation'));
+const EventDetails = React.lazy(() => import( '../components/events/EventDetails'));
+const UploadGuestList =  React.lazy(() => import( '../components/events/UploadGuestList'));
+
+const ProtectedRoute = () => {
+
+  const { isAuthenticated } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('No token');
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  if (isLoading) {
+    return <LoadingFallback />;
+  }
+  return isAuthenticated ? <Outlet /> : <Navigate to="/loginhost" replace />;
+
+};
+const createProtectedRoute = (path, Component) => ({
+  path,
+  element: <ProtectedRoute />,
+  children: [
+    {
+      path: '',
+      element: (
+        <Suspense fallback={<LoadingFallback />}>
+          <Component />
+        </Suspense>
+      )
+    }
+  ]
+});
+const createPublicRoute = (path, Component) => ({
+  path,
+  element: <Outlet />,
+  children: [
+    {
+      path: '',
+      element: (
+        <Suspense fallback={<LoadingFallback />}>
+          <Component />
+        </Suspense>
+      )
+    }
+  ]
+});
+const router = createBrowserRouter([
+  {
+    element: <MainLayout />,
+    children: [
+      createProtectedRoute("/hostOptions" , HostOptions),
+      createProtectedRoute("/create-event" , CreateEvent),
+      createProtectedRoute("/view-events" , ViewEvents),
+      createProtectedRoute("/successMessage" , SuccessMessage),
+      createProtectedRoute("/customizableInvitation" , CustomizableInvitation),
+      createProtectedRoute("/eventDetails" , EventDetails),
+      createProtectedRoute("/UploadGuestList" , UploadGuestList),
+    ]
+      
+  },
+  {
+    element: <MainLayout />,
+    children: [
+      createPublicRoute("/guest/:eventId", GuestForm),
+      createPublicRoute("/", Home),
+      createPublicRoute("/home", Home),
+      createPublicRoute("/contactPage", ContactPage),
+      createPublicRoute("/aboutPage", AboutPage),
+      createPublicRoute("/host", Host),
+    ]
+  },
+  {
+    element: <AuthLayout />,
+    children: [
+      createPublicRoute("/signuphost", SignupHost),
+      createPublicRoute("/loginhost", HostLogin),
+    ]
+  }
+], {
+  future: {
+    v7_relativeSplatPath: true
+  },
+  basename: '/'
+});
 
 const AppRoutes = () => {
-  return (
-    <EventContextProvider>
-      <Routes>
-        {/* Main Layout Routes */}
-        <Route element={<MainLayout />}>
-          {/* Public Routes - נגישים לכולם */}
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/contactPage" element={<ContactPage />} />
-          <Route path="/aboutPage" element={<AboutPage />} />
-          <Route path="/host" element={<Host />} />
-
-          {/* Private Routes - נגישים רק למשתמשים מחוברים */}
-          <Route element={<AuthProvider />}>
-            <Route path="/hostOptions" element={<HostOptions />} />
-            <Route path="/create-event" element={<CreateEvent />} />
-            <Route path="/view-events" element={<ViewEvents />} />
-            <Route path="/successMessage" element={<SuccessMessage />} />
-            <Route path="/customizableInvitation" element={<CustomizableInvitation />} />
-            <Route path="/eventDetails" element={<EventDetails />} />
-            <Route path="/UploadGuestList" element={<UploadGuestList />} />
-          </Route>
-        </Route>
-
-        {/* Auth Layout Routes */}
-        <Route element={<AuthLayout />}>
-          <Route path="/signuphost" element={<SignupHost />} />
-          <Route path="/loginhost" element={<HostLogin />} />
-          <Route path="/guest/:eventId" element={<GuestForm />} />
-        </Route>
-      </Routes>
-    </EventContextProvider>
-  );
+  return <RouterProvider router={router} />;
 };
+
+
 
 export default AppRoutes;
