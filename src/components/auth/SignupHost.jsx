@@ -15,14 +15,12 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
-    userId: "",
     phone: "",
     password: "",
     email: "",
   });
   const [errors, setErrors] = useState({
     fullName: "",
-    userId: "",
     phone: "",
     password: "",
     email: "",
@@ -120,7 +118,6 @@ const SignupForm = () => {
               <div className="space-y-4">
                 {renderField("fullName", "שם פרטי ומשפחה")}
                 {renderField("phone", "פלאפון")}
-                {renderField("userId", "תעודת זהות")}
                 {renderField("email", "מייל", "email")}
                 {renderField("password", "סיסמא", "password")}
               </div>

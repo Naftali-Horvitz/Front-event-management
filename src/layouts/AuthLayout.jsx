@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import '../styles/components/AuthLayout.css';
+import '../styles/layouts/AuthLayout.css';
 import BackButton from '../components/common/BackButton.jsx';
 
 const AuthLayout = () => {

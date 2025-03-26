@@ -34,15 +34,6 @@ export const validationRules = {
       pattern: 'כתובת אימייל לא תקינה'
     }
   },
-  password: {
-    required: true,
-    minLength: 8,
-    pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-    messages: {
-      required: 'שדה חובה',
-      minLength: 'סיסמה חייבת להכיל לפחות 8 תווים',
-    }
-  }
 };
 
 export const validateField = (name, value) => {
