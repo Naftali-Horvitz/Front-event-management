@@ -8,7 +8,7 @@ import { formatDate } from "./formatDate.js";
 
 const ShareInvitation = () => {
 
-    const port = config.backendUrl;
+    const port = "https://test-7ft1.onrender.com";
     const [copySuccess, setCopySuccess] = useState("");
     const { hostName, eventData } = useEventContext();
     const { eventName, eventDescription, eventLocation, eventDate, eventTime, eventId } = eventData;
