@@ -4,7 +4,7 @@ import axios from 'axios';
 import { PlusCircle, Calendar, Users, Check, Clock } from 'lucide-react';
 import config from "../../config.js";
 import { validateToken, getCurrentUser } from "../../utils/authUtils.js";
-import { useEventContext } from '../../context/eventDataContext.jsx';
+import { useEventContext } from '../../context/EventDataContext.jsx';
 
 function ViewEvents() {
 

@@ -3,7 +3,7 @@ import { MdEmail, MdContentCopy } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
 import config from "../../config.js";
 import { useState } from "react";
-import { useEventContext } from "../../context/eventDataContext";
+import { useEventContext } from "../../context/EventDataContext.jsx";
 import { formatDate } from "./formatDate.js";
 
 const ShareInvitation = () => {

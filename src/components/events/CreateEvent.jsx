@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Calendar, MapPin, FileText, Tag } from "lucide-react";
-import { validateToken,getCurrentUser} from "../../utils/authUtils.js";
+import { validateToken, getCurrentUser } from "../../utils/authUtils.js";
 import axios from "axios";
 import config from "../../config.js";
-import { useEventContext } from "../../context/eventDataContext";
+import { useEventContext } from "../../context/EventDataContext";
 
 function CreateEvent() {
   const { updateEventData } = useEventContext();
@@ -14,7 +14,7 @@ function CreateEvent() {
   const [formData, setFormData] = useState({
     eventName: "",
     eventDate: "",
-    eventTime:"",
+    eventTime: "",
     eventLocation: "",
     eventDescription: "",
     hostId: getCurrentUser().hostId,
@@ -61,7 +61,7 @@ function CreateEvent() {
       );
       setSuccessMessage("האירוע נוצר בהצלחה!");
       const eventId = response.data.eventId;
-      updateEventData({eventId, ...formData });
+      updateEventData({ eventId, ...formData });
       setTimeout(() => {
         navigate("/successMessage");
       }, 1000);

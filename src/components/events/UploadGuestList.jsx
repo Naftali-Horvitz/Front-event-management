@@ -4,7 +4,7 @@ import * as XLSX from 'xlsx';
 import { Upload, Save, AlertCircle, Pencil } from 'lucide-react';
 import config from "../../config.js";
 import styles from '../../styles/components/UploadGuestList.module.css';
-import { useEventContext } from "../../context/eventDataContext";
+import { useEventContext } from "../../context/EventDataContext";
 import EditGuest from '../guests/EditGuest.jsx';
 import UploadInstructions from './UploadInstructions.jsx';
 import MessageStatus from './MessageStatus.jsx';

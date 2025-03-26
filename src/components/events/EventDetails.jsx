@@ -4,12 +4,12 @@ import axios from 'axios';
 import { Calendar, MapPin, Clock, Users, Bell, Edit } from 'lucide-react';
 import config from "../../config.js";
 import { validateToken, getCurrentUser } from "../../utils/authUtils.js";
-import { useEventContext } from "../../context/eventDataContext";
+import { useEventContext } from "../../context/EventDataContext";
 
 const EventDetails = () => {
 
   const { eventData } = useEventContext();
-  const eventId  = eventData.eventId;
+  const eventId = eventData.eventId;
   const navigate = useNavigate();
   const { id } = useParams();
   const [event, setEvent] = useState(null);
@@ -29,7 +29,7 @@ const EventDetails = () => {
         const response = await axios.get(`${port}/events/details/${eventId}`, {
           headers: { Authorization: `Bearer ${getCurrentUser().token}` }
         });
-        setEvent({ ...response.data.eventDetails, ...response.data.summary});
+        setEvent({ ...response.data.eventDetails, ...response.data.summary });
         setGuests(response.data.guests);
       } catch (err) {
         setError(err.response?.data?.msg);
