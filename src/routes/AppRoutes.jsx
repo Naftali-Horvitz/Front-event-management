@@ -2,8 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
-import EventContextProvider from '../context/EventDataContext';
-import PrivateRoute from '../context/AuthContext';
+import { EventContextProvider } from '../context/EventDataContext';
+import { PrivateRoute } from '../context/AuthContext';
 
 // Components
 import Home from '../components/common/Home';
@@ -33,7 +33,7 @@ const AppRoutes = () => {
           <Route path="/contactPage" element={<ContactPage />} />
           <Route path="/aboutPage" element={<AboutPage />} />
           <Route path="/host" element={<Host />} />
-          
+
           {/* Private Routes - נגישים רק למשתמשים מחוברים */}
           <Route element={<PrivateRoute />}>
             <Route path="/hostOptions" element={<HostOptions />} />
