@@ -97,7 +97,6 @@ const router = createBrowserRouter([
   {
     element: <MainLayout />,
     children: [
-      createPublicRoute("/guest/:eventId", GuestForm),
       createPublicRoute("/", Home),
       createPublicRoute("/home", Home),
       createPublicRoute("/contactPage", ContactPage),
@@ -110,6 +109,7 @@ const router = createBrowserRouter([
     children: [
       createPublicRoute("/signuphost", SignupHost),
       createPublicRoute("/loginhost", HostLogin),
+      createPublicRoute("/guest/:eventId", GuestForm),
     ]
   }
 ], {
