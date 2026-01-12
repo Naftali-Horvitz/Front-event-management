@@ -2,15 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  position: relative;
-  overflow: hidden;
 }
 
 .host-content {
-  background-color:  rgb(202 217 232 / 42%);
-  ;
+  background-color:  rgb(202 217 232 / 42%);;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

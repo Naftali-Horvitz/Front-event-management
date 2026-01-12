@@ -7,6 +7,7 @@ import { validateField, validateForm } from "../../utils/validation";
 import { setNewUserData, isTokenPresent } from "../../utils/authUtils";
 import { useEventContext } from "../../context/EventDataContext";
 import { useAuth } from "../../context/AuthContext";
+import '../../styles/layouts/AuthLayout.css';
 
 const SignupForm = () => {
 
@@ -77,7 +78,7 @@ const SignupForm = () => {
 
   const renderField = (name, label, type = "text") => (
     <div>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">
+      <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1 auth-form-label">
         {label}
       </label>
       <input
@@ -88,7 +89,7 @@ const SignupForm = () => {
         onChange={handleChange}
         required
         className={`w-full px-4 py-3 rounded-lg border ${errors[name] ? 'border-red-500' : 'border-gray-200'
-          } bg-white/50 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none`}
+          } bg-white/50 backdrop-blur-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none auth-form-input`}
       />
       {errors[name] && (
         <div className="text-red-500 text-sm mt-1 animate-fadeInUp">
@@ -109,7 +110,7 @@ const SignupForm = () => {
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen py-12 px-4">
         <div className="w-full max-w-lg space-y-8 animate-fadeInUp">
-          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-800 to-blue-500 bg-clip-text text-transparent drop-shadow-lg">
+          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-800 to-blue-500 bg-clip-text text-transparent drop-shadow-lg auth-form-title">
             הרשמה לאתר
           </h1>
 
@@ -127,7 +128,7 @@ const SignupForm = () => {
                 disabled={isRegistering}
                 className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium 
                          hover:translate-y-[-2px] hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0
-                         transition-all duration-300 relative overflow-hidden"
+                         transition-all duration-300 relative overflow-hidden auth-form-button"
               >
                 {isRegistering ? (
                   <div className="flex items-center justify-center">
@@ -142,7 +143,7 @@ const SignupForm = () => {
             </form>
 
             {message && (
-              <div className={`text-center text-sm animate-fadeInUp ${message === "ההרשמה הצליחה!"
+              <div className={`text-center text-sm animate-fadeInUp auth-form-text ${message === "ההרשמה הצליחה!"
                 ? "text-green-600"
                 : "text-red-600"
                 }`}>

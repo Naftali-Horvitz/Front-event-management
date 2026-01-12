@@ -224,7 +224,6 @@ function ViewEvents() {
       </div>
     );
   };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -232,7 +231,6 @@ function ViewEvents() {
       </div>
     );
   }
-
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -242,61 +240,61 @@ function ViewEvents() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-4 pt-16 mt-16" dir="rtl">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">האירועים שלי</h1>
-        <button
-          onClick={() => navigate('/create-event')}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-        >
-          <PlusCircle size={20} />
-          צור אירוע חדש
-        </button>
-      </div>
-
-      {events.length === 0 ? (
-        <div className="text-center py-16">
-          <Clock className="mx-auto h-16 w-16 text-gray-400" />
-          <h2 className="mt-4 text-xl font-semibold text-gray-600">אין אירועים להצגה</h2>
-          <p className="mt-2 text-gray-500">התחל ליצור את האירוע הראשון שלך</p>
+      <div className="max-w-7xl mx-auto p-4 pt-16 mt-16" dir="rtl">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">האירועים שלי</h1>
+          <button
+            onClick={() => navigate('/create-event')}
+            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            <PlusCircle size={20} />
+            צור אירוע חדש
+          </button>
         </div>
-      ) : (
-        <>
-          {/* Stats Dashboard */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <StatCard icon={Calendar} title="סה״כ אירועים" value={stats.totalEvents} />
-            <StatCard icon={Clock} title="אירועים פעילים" value={stats.activeEvents} color="green" />
-            <StatCard icon={Users} title="סה״כ מוזמנים" value={stats.totalGuests} color="purple" />
-            <StatCard icon={Check} title="אחוז אישורים" value={`${stats.avgConfirmationRate}%`} color="yellow" />
-            <StatCard icon={Users} title="ממוצע הגעה בפועל" value={`${stats.avgActualAttendance}%`} color="green" />
-          </div>
 
-          {/* Filters */}
-          <div className="flex gap-2 mb-6">
-            {['הכל', 'פעילים', 'קרובים', 'הסתיימו'].map((filterOption) => (
-              <button
-                key={filterOption}
-                onClick={() => setFilter(filterOption)}
-                className={`px-4 py-2 rounded-md ${filter === filterOption
-                  ? 'bg-blue-100 text-blue-700'
-                  : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
-                  }`}
-              >
-                {filterOption}
-              </button>
-            ))}
+        {events.length === 0 && !loading ? (
+          <div className="text-center py-16">
+            <Clock className="mx-auto h-16 w-16 text-gray-400" />
+            <h2 className="mt-4 text-xl font-semibold text-gray-600">אין אירועים להצגה</h2>
+            <p className="mt-2 text-gray-500">התחל ליצור את האירוע הראשון שלך</p>
           </div>
+        ) : (
+          <>
+            {/* Stats Dashboard */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <StatCard icon={Calendar} title="סה״כ אירועים" value={stats.totalEvents} />
+              <StatCard icon={Clock} title="אירועים פעילים" value={stats.activeEvents} color="green" />
+              <StatCard icon={Users} title="סה״כ מוזמנים" value={stats.totalGuests} color="purple" />
+              <StatCard icon={Check} title="אחוז אישורים" value={`${stats.avgConfirmationRate}%`} color="yellow" />
+              <StatCard icon={Users} title="ממוצע הגעה בפועל" value={`${stats.avgActualAttendance}%`} color="green" />
+            </div>
 
-          {/* Events Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {events.map((event) => (
-              <EventCard key={event._id} event={event} />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+            {/* Filters */}
+            <div className="flex gap-2 mb-6">
+              {['הכל', 'פעילים', 'קרובים', 'הסתיימו'].map((filterOption) => (
+                <button
+                  key={filterOption}
+                  onClick={() => setFilter(filterOption)}
+                  className={`px-4 py-2 rounded-md ${filter === filterOption
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                    }`}
+                >
+                  {filterOption}
+                </button>
+              ))}
+            </div>
+
+            {/* Events Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {events.map((event) => (
+                <EventCard key={event._id} event={event} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
   );
 }
 

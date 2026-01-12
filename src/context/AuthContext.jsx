@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', token);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     setIsAuthenticated(true);
-    console.log(isAuthenticated)
   };
 
   return (

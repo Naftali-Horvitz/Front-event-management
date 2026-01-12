@@ -7,6 +7,7 @@ import { validateLoginField, validateLoginForm } from "../../utils/validation";
 import { setNewUserData, isTokenPresent, getCurrentUser } from "../../utils/authUtils";
 import { useEventContext } from "../../context/EventDataContext";
 import { useAuth } from "../../context/AuthContext";
+import '../../styles/layouts/AuthLayout.css';
 
 const HostLogin = () => {
 

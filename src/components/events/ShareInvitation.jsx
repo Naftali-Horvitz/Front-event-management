@@ -1,10 +1,8 @@
 import { Calendar, MapPin, User, FileText } from "lucide-react";
 import { MdEmail, MdContentCopy } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
-import config from "../../config.js";
 import { useState } from "react";
 import { useEventContext } from "../../context/EventDataContext.jsx";
-import { formatDate } from "./formatDate.js";
 
 const ShareInvitation = () => {
 
@@ -15,8 +13,7 @@ const ShareInvitation = () => {
     const registrationUrl = `${port}/guest/${eventId}`;
 
     // המרת התאריך לפורמט dd/mm/yyyy
-    const formattedEventDate = eventDate ? formatDate(eventDate) : '';
-
+    const formattedEventDate = new Date(eventData.eventDate).toLocaleDateString('he-IL')
 
     const messageHtml = `
     <h2>הזמנה לאירוע</h2>

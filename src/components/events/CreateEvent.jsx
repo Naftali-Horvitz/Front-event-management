@@ -7,6 +7,7 @@ import config from "../../config.js";
 import { useEventContext } from "../../context/EventDataContext";
 
 function CreateEvent() {
+
   const { updateEventData } = useEventContext();
   const navigate = useNavigate();
   const [isCreating, setIsCreating] = useState(false);
@@ -22,7 +23,6 @@ function CreateEvent() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const port = config.backendUrl;
-
   useEffect(() => {
     if (!validateToken()) {
       setIsTokenValid(false);
@@ -63,7 +63,8 @@ function CreateEvent() {
       const eventId = response.data.eventId;
       updateEventData({ eventId, ...formData });
       setTimeout(() => {
-        navigate("/successMessage");
+        // navigate("/successMessage");
+        navigate("/invitation-designer");
       }, 1000);
     } catch (error) {
       console.error("Error creating event:", error);
@@ -180,7 +181,9 @@ function CreateEvent() {
                     {errorMessage}
                   </div>
                 )}
-
+                <div className="text-center text-gray-500 text-sm mb-4">
+                  * לאחר יצירת האירוע, תועבר לדף עיצוב ההזמנה
+                </div>
                 <button
                   type="submit"
                   disabled={isCreating}
@@ -188,7 +191,7 @@ function CreateEvent() {
                            font-medium transition-all duration-300 hover:shadow-lg hover:opacity-90
                            disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isCreating ? "יוצר אירוע..." : "צור אירוע"}
+                  {isCreating ? "יוצר אירוע..." : "  צור אירוע"}
                 </button>
               </form>
             </div>
